@@ -7,17 +7,23 @@
 #
 #
 # def main():
-#     numbers = [int(x) for x in input("Enter numbers: ").split()]
-#     result = numbers[0]
-#     for number in numbers[1:]:
+#     # numbers = [int(x) for x in input("Enter numbers: ").split()]
+#     numbers = input("Enter numbers: ").split()
+#     converted_numbers = []
+#     for number in numbers:
+#         if not number.isdigit():
+#             print("Please enter only numbers.")
+#             return
+#         converted_numbers.append(int(number))
+#
+#     result = converted_numbers[0]
+#     for number in converted_numbers[1:]:
 #         result = gcd(result, number)
 #     print(result)
-
-
+#
+#
 # if __name__ == "__main__":
 #     main()
-
-# print(gcd(21, 49))
 
 # 2. Write a script that calculates how many vowels are in a string.
 
@@ -34,14 +40,17 @@
 # 3. Write a script that receives two strings and prints the number of occurrences of the first string in the second.
 
 # def count_occurrences(substring, string):
-#     counter = 0
-#     for i in range(len(string) - len(substring) + 1):
-#         if string[i:i + len(substring)] == substring:
-#             counter += 1
-#     return counter
-
-
-# print(count_occurrences('ll', 'Hello Hell'))
+#     return string.count(substring)
+#
+#
+# def main():
+#     string = input("Enter string: ")
+#     substring = input("Enter substring: ")
+#     print(count_occurrences(substring, string))
+#
+#
+# if __name__ == "__main__":
+#     main()
 
 # 4. Write a script that converts a string of characters written in UpperCamelCase into lowercase_with_underscores.
 
@@ -55,8 +64,8 @@
 #     if result[0] == '_':
 #         result = result[1:]
 #     return result
-
-
+#
+#
 # print(convert('HelloWorld'))
 
 # 5. Given a square matrix of characters writes a script that prints the string obtained by going through the matrix
@@ -118,8 +127,8 @@
 
 # def count_bits(number):
 #     return bin(number).count('1')
-
-
+#
+#
 # print(count_bits(24))
 
 # 9. Write a functions that determine the most common letter in a string. For example if the string is "an apple is
