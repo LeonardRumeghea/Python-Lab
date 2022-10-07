@@ -40,7 +40,11 @@
 # 3. Write a script that receives two strings and prints the number of occurrences of the first string in the second.
 
 # def count_occurrences(substring, string):
-#     return string.count(substring)
+#     counter = 0
+#     for i in range(len(string) - len(substring) + 1):
+#         if string[i:i + len(substring)] == substring:
+#             counter += 1
+#     return counter
 #
 #
 # def main():
@@ -55,15 +59,7 @@
 # 4. Write a script that converts a string of characters written in UpperCamelCase into lowercase_with_underscores.
 
 # def convert(string):
-#     result = ''
-#     for char in string:
-#         if char.isupper():
-#             result += '_' + char.lower()
-#         else:
-#             result += char
-#     if result[0] == '_':
-#         result = result[1:]
-#     return result
+#     return ''.join(['_' + char.lower() if char.isupper() else char for char in string]).lstrip('_')
 #
 #
 # print(convert('HelloWorld'))
@@ -149,7 +145,7 @@
 # are separated by only ONE space. For example: "I have Python exam" has 4 words.
 
 # def count_words(string):
-#     return len(string.split(' '))
-
-
+#     return len(string.strip().split(' '))
+#
+#
 # print(count_words('I have Python exam'))
