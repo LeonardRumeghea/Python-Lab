@@ -33,9 +33,15 @@
 #         if char in 'aeiouAEIOU':
 #             counter += 1
 #     return counter
-
-
-# print(count_vowels('hello world'))
+#
+#
+# def main():
+#     string = input("Enter a string: ")
+#     print("Number of vowels:", count_vowels(string))
+#
+#
+# if __name__ == "__main__":
+#     main()
 
 # 3. Write a script that receives two strings and prints the number of occurrences of the first string in the second.
 
@@ -50,7 +56,7 @@
 # def main():
 #     string = input("Enter string: ")
 #     substring = input("Enter substring: ")
-#     print(count_occurrences(substring, string))
+#     print("Number of occurrences:", count_occurrences(substring, string))
 #
 #
 # if __name__ == "__main__":
@@ -62,7 +68,13 @@
 #     return ''.join(['_' + char.lower() if char.isupper() else char for char in string]).lstrip('_')
 #
 #
-# print(convert('HelloWorld'))
+# def main():
+#     string = input("Enter string: ")
+#     print("Converted string:", convert(string))
+#
+#
+# if __name__ == "__main__":
+#     main()
 
 # 5. Given a square matrix of characters writes a script that prints the string obtained by going through the matrix
 # in spiral order (as in the example):
@@ -84,22 +96,41 @@
 #             if matrix[i][j] is None:
 #                 break
 #     return result
-
-
-# print(spiral([
-#     ['f', 'i', 'r', 's'],
-#     ['n', '_', 'l', 't'],
-#     ['o', 'b', 'a', '_'],
-#     ['h', 't', 'y', 'p'],
-# ]))
+#
+#
+# def main():
+#     spiral([
+#         ['f', 'i', 'r', 's'],
+#         ['n', '_', 'l', 't'],
+#         ['o', 'b', 'a', '_'],
+#         ['h', 't', 'y', 'p'],
+#     ])
+#     print("Result: ", spiral)
+#
+#
+# if __name__ == "__main__":
+#     main()
 
 # 6. Write a function that validates if a number is a palindrome.
 
 # def is_palindrome(number):
 #     return str(number) == str(number)[::-1]
-
-
-# print(is_palindrome(12321))
+#
+#
+# def main():
+#     number = input("Enter number: ")
+#     if not number.isdigit():
+#         print("Please enter only numbers.")
+#         return
+#     else:
+#         if is_palindrome(number):
+#             print(number + " is a palindrome.")
+#         else:
+#             print(number + " is not a palindrome.")
+#
+#
+# if __name__ == "__main__":
+#     main()
 
 # 7. Write a function that extract a number from a text (for example if the text is "An apple is 123 USD",
 # this function will return 123, or if the text is "abc123abc" the function will extract 123). The function will
@@ -112,11 +143,18 @@
 #             result += char
 #         elif result != '':
 #             break
+#     if result == '':
+#         return None
 #     return int(result)
-
-
-# print(extract_number('An apple is 123 USD'))
-# print(extract_number('abc123abc'))
+#
+#
+# def main():
+#     string = input("Enter string: ")
+#     print("Extracted number:", extract_number(string))
+#
+#
+# if __name__ == "__main__":
+#     main()
 
 # 8. Write a function that counts how many bits with value 1 a number has. For example for number 24, the binary
 # format is 00011000, meaning 2 bits with value "1"
@@ -125,7 +163,17 @@
 #     return bin(number).count('1')
 #
 #
-# print(count_bits(24))
+# def main():
+#     number = input("Enter number: ")
+#     if not number.isdigit():
+#         print("Please enter only numbers.")
+#         return
+#     else:
+#         print("Number of bits with value 1:", count_bits(int(number)))
+#
+#
+# if __name__ == "__main__":
+#     main()
 
 # 9. Write a functions that determine the most common letter in a string. For example if the string is "an apple is
 # not a tomato", then the most common character is "a" (4 times). Only letters (A-Z or a-z) are to be considered.
@@ -137,9 +185,18 @@
 #         if char.isalpha():
 #             counter[char] = counter.get(char, 0) + 1
 #     return max(counter, key=counter.get)
-
-
-# print(most_common_letter('an apple is not a tomato'))
+#
+#
+# def main():
+#     string = input("Enter string: ")
+#     if not string.isalpha():
+#         print("Please enter only letters.")
+#         return
+#     print("Most common letter:", most_common_letter(string))
+#
+#
+# if __name__ == "__main__":
+#     main()
 
 # 10. Write a function that counts how many words exists in a text. A text is considered to be form out of words that
 # are separated by only ONE space. For example: "I have Python exam" has 4 words.
@@ -148,4 +205,10 @@
 #     return len(string.strip().split(' '))
 #
 #
-# print(count_words('I have Python exam'))
+# def main():
+#     string = input("Enter string: ")
+#     print("Number of words:", count_words(string))
+#
+#
+# if __name__ == "__main__":
+#     main()
