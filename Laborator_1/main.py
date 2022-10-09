@@ -1,5 +1,13 @@
-# 1. Find The greatest common divisor of multiple numbers read from the console.
+'''
+Comemtarii generale: nu e nevoie sa comentezi tot si sa faci cate o functie main si dupa sa mai faci si artificiul cu if __name__ == '__main__'. Poti avea doar un singur artificiu,
+iar in interior sa apelezi ce iti doresti tu. Ar fi nice daca ai sti exact care e treaba cu acest artificiu, ce face si pentru ce e folosit, dar daca nu, o sa aflam toti la cursu cu packages.
+'''
 
+# 1. Find The greatest common divisor of multiple numbers read from the console.
+''' 
+prima problema e in regula.
+
+'''
 # def gcd(a, b):
 #     while b:
 #         a, b = b, a % b
@@ -26,7 +34,9 @@
 #     main()
 
 # 2. Write a script that calculates how many vowels are in a string.
-
+'''
+a doua problema e in regula. am vazut ca ai folosit list comprehension si la 1., ai putea si aici, apoi sa folosesti built in functions, cum ar fi sum sau len.
+'''
 # def count_vowels(string):
 #     counter = 0
 #     for char in string:
@@ -44,7 +54,9 @@
 #     main()
 
 # 3. Write a script that receives two strings and prints the number of occurrences of the first string in the second.
-
+'''
+munctioreasca metoda, e foarte in regula, atinge corner case-urile pe care unii colegi nu au reusit sa le acopere. pe viitor ai putea incerca sa vezi cum ar functiona functia 'find'.
+'''
 # def count_occurrences(substring, string):
 #     counter = 0
 #     for i in range(len(string) - len(substring) + 1):
@@ -63,7 +75,9 @@
 #     main()
 
 # 4. Write a script that converts a string of characters written in UpperCamelCase into lowercase_with_underscores.
-
+'''
+looks good
+'''
 # def convert(string):
 #     return ''.join(['_' + char.lower() if char.isupper() else char for char in string]).lstrip('_')
 #
@@ -78,7 +92,9 @@
 
 # 5. Given a square matrix of characters writes a script that prints the string obtained by going through the matrix
 # in spiral order (as in the example):
-
+'''
+nice
+'''
 # def spiral(matrix):
 #     moves = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 #     result = ''
@@ -112,7 +128,9 @@
 #     main()
 
 # 6. Write a function that validates if a number is a palindrome.
-
+'''
+great
+'''
 # def is_palindrome(number):
 #     return str(number) == str(number)[::-1]
 #
@@ -135,7 +153,9 @@
 # 7. Write a function that extract a number from a text (for example if the text is "An apple is 123 USD",
 # this function will return 123, or if the text is "abc123abc" the function will extract 123). The function will
 # extract only the first number that is found.
-
+'''
+great
+'''
 # def extract_number(string):
 #     result = ''
 #     for char in string:
@@ -158,7 +178,9 @@
 
 # 8. Write a function that counts how many bits with value 1 a number has. For example for number 24, the binary
 # format is 00011000, meaning 2 bits with value "1"
-
+'''
+yep, perfect
+'''
 # def count_bits(number):
 #     return bin(number).count('1')
 #
@@ -178,7 +200,9 @@
 # 9. Write a functions that determine the most common letter in a string. For example if the string is "an apple is
 # not a tomato", then the most common character is "a" (4 times). Only letters (A-Z or a-z) are to be considered.
 # Casing should not be considered "A" and "a" represent the same character.
-
+'''
+great
+'''
 # def most_common_letter(string):
 #     counter = {}
 #     for char in string.lower():
@@ -200,7 +224,9 @@
 
 # 10. Write a function that counts how many words exists in a text. A text is considered to be form out of words that
 # are separated by only ONE space. For example: "I have Python exam" has 4 words.
-
+'''
+great
+'''
 # def count_words(string):
 #     return len(string.strip().split(' '))
 #
