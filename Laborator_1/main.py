@@ -8,30 +8,30 @@ iar in interior sa apelezi ce iti doresti tu. Ar fi nice daca ai sti exact care 
 prima problema e in regula.
 
 '''
-# def gcd(a, b):
-#     while b:
-#         a, b = b, a % b
-#     return a
-#
-#
-# def main():
-#     # numbers = [int(x) for x in input("Enter numbers: ").split()]
-#     numbers = input("Enter numbers: ").split()
-#     converted_numbers = []
-#     for number in numbers:
-#         if not number.isdigit():
-#             print("Please enter only numbers.")
-#             return
-#         converted_numbers.append(int(number))
-#
-#     result = converted_numbers[0]
-#     for number in converted_numbers[1:]:
-#         result = gcd(result, number)
-#     print(result)
-#
-#
-# if __name__ == "__main__":
-#     main()
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+
+def main():
+    # numbers = [int(x) for x in input("Enter numbers: ").split()]
+    numbers = input("Enter numbers: ").split()
+    converted_numbers = []
+    for number in numbers:
+        if not number.isdigit():
+            print("Please enter only numbers.")
+            return
+        converted_numbers.append(int(number))
+
+    result = converted_numbers[0]
+    for number in converted_numbers[1:]:
+        result = gcd(result, number)
+    print(result)
+
+
+if __name__ == "__main__":
+    main()
 
 # 2. Write a script that calculates how many vowels are in a string.
 '''
