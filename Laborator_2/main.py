@@ -186,7 +186,12 @@
 
 # def tuples(*lists):
 #     max_list_len = max([len(lst) for lst in lists])
+#     Manual way of doing it:
 #     return [tuple(lst[i] if i < len(lst) else None for lst in lists) for i in range(max_list_len)]
+
+#     Using zip with *:
+#     [lst.extend([None] * (max_list_len - len(lst))) if len(lst) < max_list_len else lst for lst in lists]
+#     return list(zip(*lists))
 #
 #
 # print(tuples([1, 2, 3], [5, 6, 7, 9, 8], ["a", "b", "c", "d"]))
