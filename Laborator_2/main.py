@@ -27,6 +27,8 @@
 #
 #
 # def prime_numbers_from_list(numbers):
+#     if numbers is None:
+#         return None
 #     prime_numbers = [number for number in numbers if is_prime(number)]
 #     return prime_numbers
 #
@@ -49,6 +51,10 @@
 #
 #
 # def sets(a, b):
+#     if a is None:
+#         return None
+#     if b is None:
+#         return None
 #     return intersect(a, b), union(a, b), difference(a, b), difference(b, a)
 #
 #
@@ -189,6 +195,10 @@
 # tuple. Example: ('abc', 'bcd'), ('abc', 'zza')] ==> [('abc', 'zza'), ('abc', 'bcd')]
 
 # def order_tuples(tuples):
+#     if len(tuples) == 0:
+#         return tuples
+#     if tuples is None:
+#         return None
 #     return sorted(tuples, key=lambda x: x[1][2])
 #
 #
@@ -204,7 +214,7 @@
 #     result = []
 #     for word in words:
 #         for group in result:
-#             if word[-2:] == group[0][-2:]:
+#             if len(word) > 2 and word[-2:] == group[0][-2:]:
 #                 group.append(word)
 #                 break
 #         else:
