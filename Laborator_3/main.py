@@ -1,20 +1,8 @@
 # 1.Write a function that receives as parameters two lists a and b and returns a list of sets containing:
 # (an intersected with b, a reunited with b, a - b, b - a)
 
-# def intersect(a, b):
-#     return {value for value in a if value in b}
-#
-#
-# def union(a, b):
-#     return set(a).union({value for value in b if value not in a})
-#
-#
-# def difference(a, b):
-#     return {value for value in a if value not in b}
-#
-#
 # def sets(a, b):
-#     return [intersect(a, b), union(a, b), difference(a, b), difference(b, a)]
+#     return [set(a) & set(b), set(a) | set(b), set(a) - set(b), set(b) - set(a)]
 #
 #
 # print(sets([1, 2, 3, 4, 5], [3, 4, 5, 6, 7]))
@@ -25,10 +13,20 @@
 # {'a': 3, 's': 2, '.': 1, 'e': 1, 'h': 1, 'l': 1, 'p': 2, ' ': 2, 'A': 1, 'n': 1} .
 
 # def count_characters(text):
-#     return {character: text.count(character) for character in text if character.isalpha()}
+#     if text is not None:
+#         if type(text) is not str:
+#             raise TypeError("The parameter must be a string!")
+#         return {char: text.count(char) for char in text}
+#     else:
+#         return None
 #
 #
-# print(count_characters("Ana has apples."))
+# try:
+#     print(count_characters("Ana has apples."))
+#     print(count_characters(None))
+#     print(count_characters(123))
+# except TypeError as e:
+#     print(e)
 
 # 3. Compare two dictionaries without using the operator "==" returning True or False. (Attention, dictionaries must
 # be recursively covered because they can contain other containers, such as dictionaries, lists, sets, etc.)
@@ -66,7 +64,7 @@
 #     return f"<{tag} {attributes}> {content} </{tag}>"
 #
 #
-# print(build_xml_element("a", "Hello there", href="https://python.org", _class="my-link", id="someId"))
+# print(build_xml_element("a", "Hello World", href="https://python.org", _class="my-link", id="someId"))
 
 
 # 5. The validate_dict function that receives as a parameter a set of tuples ( that represents validation rules for a
@@ -149,16 +147,34 @@
 # will return ['a', '6', 'z', '2']
 
 # def loop(mapping):
+#
+#     if mapping is None:
+#         raise ValueError("The mapping cannot be None")
+#
+#     if len(mapping) == 0:
+#         raise ValueError("The mapping cannot be empty")
+#
+#     if "start" not in mapping:
+#         raise ValueError("The mapping must contain a key named 'start'")
+#
 #     result = []
 #     current_key = mapping["start"]
 #     while current_key not in result:
 #         result.append(current_key)
 #         current_key = mapping[current_key]
 #
+#         if current_key not in mapping:
+#             raise ValueError(f"Key {current_key} not found in mapping. Mapping: {mapping}")
+#
 #     return result
 #
 #
-# print(loop({'start': 'a', 'b': 'a', 'a': '6', '6': 'z', 'x': '2', 'z': '2', '2': '2', 'y': 'start'}))
+# try:
+#     print(loop({'start': 'a', 'b': 'a', 'a': '6', '6': 'z', 'x': '2', 'z': '2', '2': '2', 'y': 'start'}))
+#     print(loop({'start': 'a', 'b': 'a', 'a': '6', '6': 'z', 'x': '2', 'z': '22', '2': '2', 'y': 'start'}))
+#     print(loop(None))
+# except ValueError as e:
+#     print(e)
 
 # 9. Write a function that receives a variable number of positional arguments and a variable number of keyword
 # arguments and will return the number of positional arguments whose values can be found among keyword arguments
