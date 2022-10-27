@@ -31,7 +31,95 @@
 # 3. Compare two dictionaries without using the operator "==" returning True or False. (Attention, dictionaries must
 # be recursively covered because they can contain other containers, such as dictionaries, lists, sets, etc.)
 
+# def compare_lists(first_list, second_list):
+#     if type(first_list) is not list:
+#         raise TypeError("The first parameter must be a list!")
+#
+#     if type(second_list) is not list:
+#         raise TypeError("The second parameter must be a list!")
+#
+#     if len(first_list) != len(second_list):
+#         return False
+#
+#     for index, value in enumerate(first_list):
+#         if type(value) == list:
+#             if not compare_lists(value, second_list[index]):
+#                 return False
+#         elif type(value) == tuple:
+#             if not compare_tuples(value, second_list[index]):
+#                 return False
+#         elif type(value) == dict:
+#             if not compare_dictionaries(value, second_list[index]):
+#                 return False
+#         elif type(value) == set:
+#             if not compare_sets(value, second_list[index]):
+#                 return False
+#
+#         elif value != second_list[index]:
+#             return False
+#
+#     return True
+#
+#
+# def compare_tuples(first_tuple, second_tuple):
+#     if type(first_tuple) is not tuple:
+#         raise TypeError("The first parameter must be a tuple!")
+#
+#     if type(second_tuple) is not tuple:
+#         raise TypeError("The second parameter must be a tuple!")
+#
+#     if len(first_tuple) != len(second_tuple):
+#         return False
+#
+#     for index, value in enumerate(first_tuple):
+#         if type(value) == tuple:
+#             if not compare_tuples(value, second_tuple[index]):
+#                 return False
+#         elif type(value) == dict:
+#             if not compare_dictionaries(value, second_tuple[index]):
+#                 return False
+#         elif type(value) == list:
+#             if not compare_lists(value, second_tuple[index]):
+#                 return False
+#         elif type(value) == set:
+#             if not compare_sets(value, second_tuple[index]):
+#                 return False
+#
+#         elif value != second_tuple[index]:
+#             return False
+#
+#     return True
+#
+#
+# def compare_sets(first_set, second_set):
+#     if type(first_set) is not set:
+#         raise TypeError("The first parameter must be a set!")
+#
+#     if type(second_set) is not set:
+#         raise TypeError("The second parameter must be a set!")
+#
+#     if len(first_set) != len(second_set):
+#         return False
+#
+#     for value in first_set:
+#         if value not in second_set:
+#             return False
+#
+#         second_set.remove(value)
+#
+#     if len(second_set) != 0:
+#         return False
+#
+#     return True
+#
+#
 # def compare_dictionaries(first_dictionary, second_dictionary):
+#     if type(first_dictionary) is not dict:
+#         raise TypeError("The first parameter must be a dictionary!")
+#
+#     if type(second_dictionary) is not dict:
+#         raise TypeError("The second parameter must be a dictionary!")
+#
 #     if len(first_dictionary) != len(second_dictionary):
 #         return False
 #
@@ -42,6 +130,15 @@
 #         if type(value) == dict:
 #             if not compare_dictionaries(value, second_dictionary[key]):
 #                 return False
+#         elif type(value) == list:
+#             if not compare_lists(value, second_dictionary[key]):
+#                 return False
+#         elif type(value) == tuple:
+#             if not compare_tuples(value, second_dictionary[key]):
+#                 return False
+#         elif type(value) == set:
+#             if not compare_sets(value, second_dictionary[key]):
+#                 return False
 #
 #         elif value != second_dictionary[key]:
 #             return False
@@ -49,10 +146,14 @@
 #     return True
 #
 #
-# print(compare_dictionaries(
-#     {"k1": 1, "k2": 2, "k3_dict": {"k3": 3, "k4": 4}},
-#     {"k1": 1, "k2": 2, "k3_dict": {"k3": 3, "k4": 4}}
-# ))
+# try:
+#     print(compare_dictionaries(
+#         {"k1": 1, "k2": 2, "k3_dict": {"k3": 3, "k4": {1, 2}}},
+#         {"k1": 1, "k2": 2, "k3_dict": {"k3": 3, "k4": {1, 2}}}
+#     ))
+#     print(compare_dictionaries(1, 2))
+# except TypeError as e:
+#     print(e)
 
 # 4. The build_xml_element function receives the following parameters: tag, content, and key-value elements given as
 # name-parameters. Build and return a string that represents the corresponding XML element. Example:
@@ -100,11 +201,17 @@
 # this objective).
 
 # def count_unique_and_duplicate_elements(elements):
-#     unique_elements = set(elements)
-#     return len(unique_elements), len(elements) - len(unique_elements)
+#     v1: calculate the number of unique elements and subtract it from the total number of elements
+#     unique_elements_count = len(set(elements))
+#     return unique_elements_count, len(elements) - unique_elements_count
 #
-#
-# print(count_unique_and_duplicate_elements([0, 0, 1, 2, 3, 4, 4, 5]))
+#     v2: calculates the number of unique entries that are repeated in the list.
+#     elements_appears = {element: elements.count(element) for element in elements}
+#     unique_elements_count = len([element for element, count in elements_appears.items() if count > 1])
+#     return len(set(elements)), unique_elements_count
+
+
+# print(count_unique_and_duplicate_elements([0, 0, 1, 2, 3, 4, 4, 4, 5]))
 
 # 7. Write a function that receives a variable number of sets and returns a dictionary with the following operations
 # from all sets two by two: reunion, intersection, a-b, b-a. The key will have the following form: "a op b",
@@ -125,14 +232,12 @@
 #         "-": lambda a, b: a - b
 #     }
 #
-#     result = {
+#     return {
 #         f"{sets[i]} {operation} {sets[j]}": function(sets[i], sets[j])
 #         for i in range(len(sets))
 #         for j in range(i + 1, len(sets))
 #         for operation, function in operations.items()
 #     }
-#
-#     return result
 #
 #
 # for key, value in sets_operations({1, 2}, {2, 3}).items():
