@@ -20,7 +20,7 @@
 # def is_prime(number):
 #     if number < 2:
 #         return False
-#     for i in range(2, number):
+#     for i in range(2, int(number / 2) + 1):
 #         if number % i == 0:
 #             return False
 #     return True
@@ -229,8 +229,8 @@
 #
 # METHOD 2 - FANCY - O(n * log n) in the worst case (when no words rhyme with other)\
 # def group_by_rhyme(words):
-#     words = sorted(words, key=lambda x: x[-2:])  # sort by last 2 letters - O(n * log n)
 #     words = [word.lower() for word in words]
+#     words = sorted(words, key=lambda x: x[-2:])  # sort by last 2 letters - O(n * log n)
 #     buckets = [[words[0]]]
 #     [buckets[-1].append(word) if word[-2:] == buckets[-1][0][-2:] else buckets.append([word]) for word in words[1:]]
 #     return buckets
