@@ -123,35 +123,38 @@ import os
 
 # 6.
 # def file_contains_target(target, to_search):
+#
+#     if target.endswith('.docx'):
+#         return False
+#
 #     with open(target, 'r') as f:
 #         return to_search in f.read()
 #
 #
-# def get_files(target, to_search, callback):
-#
-#     try:
-#         if os.path.isfile(target):
-#             if file_contains_target(target, to_search):
-#                 return [target]
-#             else:
-#                 return []
-#
-#         elif os.path.isdir(target):
-#             files = (file for file in os.listdir(target) if os.path.isfile(os.path.join(target, file)))
-#             return [file for file in files if file_contains_target(os.path.join(target, file), to_search)]
-#
-#         else:
-#             raise ValueError('Invalid path')
-#     except Exception as e:
-#         callback(e)
-#         return []
+# def throw_exception(error):
+#     # raise error
+#     print(error)
 #
 #
-# def callback(exception):
-#     print(exception)
+# def get_files(target, to_search, callback_function):
+#
+#     if os.path.exists(target) is False:
+#         callback_function(ValueError('Path is incorrect!'))
+#
+#     if os.path.isfile(target):
+#         return [target] if file_contains_target(target, to_search) else []
+#
+#     if os.path.isdir(target):
+#         files = (file for file in os.listdir(target) if os.path.isfile(os.path.join(target, file)))
+#         return [file for file in files if file_contains_target(os.path.join(target, file), to_search)]
+#
+#     callback_function(ValueError('Invalid path!'))
 #
 #
-# print(get_files('D:\\Documents\\GitHub\\Python-Lab\\Laborator_4\\Folder', 'mesaj', callback))
+# try:
+#     print(get_files('D:\\Documents\\GitHub\\Python-Lab\\Laborator_4\\Folder1', 'mesaj', throw_exception))
+# except TypeError as e:
+#     print(e)
 
 
 # 7.
@@ -175,11 +178,12 @@ import os
 # try:
 #     print('For main.py: ')
 #     for key, value in get_file_info('D:\\Documents\\GitHub\\Python-Lab\\Laborator_4\\main.py').items():
-#         print(f'\t{key}: {value}')
+#         print(f'\t{key.replace("_", " ")}: {value}')
 #
 #     print('\nFor linux_file: ')
 #     for key, value in get_file_info('D:\\Documents\\GitHub\\Python-Lab\\Laborator_4\\Folder\\linux_file').items():
-#         print(f'\t{key}: {value}')
+#         print(f'\t{key.replace("_", " ")}: {value}')
+#
 # except Exception as e:
 #     print(e)
 
