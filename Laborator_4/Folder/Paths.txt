@@ -1,0 +1,2 @@
+D:\Documents\GitHub\Python-Lab\Laborator_4\Folder\A1.txt
+D:\Documents\GitHub\Python-Lab\Laborator_4\Folder\Another File.txt
