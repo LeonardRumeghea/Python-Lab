@@ -1,4 +1,8 @@
 import os
+import PyPDF2
+# import docx
+# import textract
+import docx2txt
 
 
 # 1.
@@ -29,7 +33,7 @@ import os
 #         raise TypeError("The path is not a directory!")
 #
 #     files = (os.path.join(director, file) for file in os.listdir(director)
-#              if os.path.isfile(os.path.join(director, file)) and file.startswith('A'))
+#              if file.startswith('A') and os.path.isfile(os.path.join(director, file)))
 #
 #     with open(write_to, 'w') as f:
 #         f.writelines('\n'.join(files))
@@ -51,7 +55,7 @@ import os
 #         raise TypeError('Path is incorrect!')
 #
 #     if os.path.isfile(my_path):
-#         with open(my_path, 'r') as f:
+#         with open(my_path, 'r', encoding='utf-8') as f:
 #             return f.read()[-20:]
 #
 #     if os.path.isdir(my_path):
@@ -62,19 +66,20 @@ import os
 #             # file[2] - files list
 #             for file in files[2]:
 #                 if file.__contains__('.') and os.path.isfile(os.path.join(str(files[0]), str(file))):
-#                     extensions.update({file.split('.')[-1]: extensions.get(file.split('.')[-1], 0) + 1})
+#                     extensions.update({file.split('.')[-1]: extensions.get(key=file.split('.')[-1], value=0) + 1})
 #
 #         return sorted(extensions.items(), key=lambda x: x[1], reverse=True)
 #
 #
 # try:
-#     print(get_last_20_chars_or_extensions('D:\\Documents\\GitHub\\Python-Lab\\Laborator_4\\Folder'))
+#     print(get_last_20_chars_or_extensions('D:\\Documents\\GitHub\\Python-Lab\\Laborator_4\\Folder\\A1.txt'))
 # except TypeError as e:
 #     print(e)
 
 
 # 4.
 # def get_extensions(director):
+#
 #     if os.path.exists(director) is False:
 #         raise TypeError('Path is incorrect!')
 #
@@ -93,14 +98,27 @@ import os
 # 5.
 # def file_contains_target(target, to_search):
 #
-#     if target.endswith('.docx'):
+#     try:
+#         if target.endswith('.docx'):
+#             return to_search in docx2txt.process(target)
+#
+#         if target.endswith('.pdf'):
+#             with open(target, 'rb') as f:
+#                 pdf_reader = PyPDF2.PdfFileReader(f)
+#                 for page in range(pdf_reader.numPages):
+#                     if pdf_reader.getPage(page).extractText().find(to_search) != -1:
+#                         return True
+#                 return False
+#
+#         with open(target, 'r', encoding='utf-8') as f:
+#             return to_search in f.read()
+#
+#     except Exception as exception:
+#         print(f'An error occurred while processing the file: {target}\n\t{str(exception)}\n')
 #         return False
 #
-#     with open(target, 'r') as f:
-#         return to_search in f.read()
 #
-#
-# def get_files(target, to_search):
+# def get_files_who_contains(target, to_search):
 #
 #     if os.path.exists(target) is False:
 #         raise ValueError('Path is incorrect!')
@@ -116,19 +134,32 @@ import os
 #
 #
 # try:
-#     print(get_files('D:\\Documents\\GitHub\\Python-Lab\\Laborator_4\\Folder', 'mesaj'))
+#     print(get_files_who_contains('D:\\Documents\\GitHub\\Python-Lab\\Laborator_4\\Folder', 'mesaj'))
 # except TypeError as e:
 #     print(e)
 
 
 # 6.
-# def file_contains_target(target, to_search):
+# def file_contains_target(target, to_search, callback_function):
 #
-#     if target.endswith('.docx'):
+#     try:
+#         if target.endswith('.docx'):
+#             return to_search in docx2txt.process(target)
+#
+#         if target.endswith('.pdf'):
+#             with open(target, 'rb') as f:
+#                 pdf_reader = PyPDF2.PdfFileReader(f)
+#                 for page in range(pdf_reader.numPages):
+#                     if pdf_reader.getPage(page).extractText().find(to_search) != -1:
+#                         return True
+#                 return False
+#
+#         with open(target, 'r', encoding='utf-8') as f:
+#             return to_search in f.read()
+#
+#     except Exception as exception:
+#         callback_function(f'An error occurred while processing the file: {target}\n\t{str(exception)}\n')
 #         return False
-#
-#     with open(target, 'r') as f:
-#         return to_search in f.read()
 #
 #
 # def throw_exception(error):
@@ -142,17 +173,17 @@ import os
 #         callback_function(ValueError('Path is incorrect!'))
 #
 #     if os.path.isfile(target):
-#         return [target] if file_contains_target(target, to_search) else []
+#         return [target] if file_contains_target(target, to_search, callback_function) else []
 #
 #     if os.path.isdir(target):
 #         files = (file for file in os.listdir(target) if os.path.isfile(os.path.join(target, file)))
-#         return [file for file in files if file_contains_target(os.path.join(target, file), to_search)]
+#         return [file for file in files if file_contains_target(os.path.join(target, file), to_search, callback_function)]
 #
 #     callback_function(ValueError('Invalid path!'))
 #
 #
 # try:
-#     print(get_files('D:\\Documents\\GitHub\\Python-Lab\\Laborator_4\\Folder1', 'mesaj', throw_exception))
+#     print(get_files('D:\\Documents\\GitHub\\Python-Lab\\Laborator_4\\Folder', 'mesaj', throw_exception))
 # except TypeError as e:
 #     print(e)
 
@@ -198,10 +229,10 @@ import os
 #         raise ValueError('The path is not a directory!')
 #
 #     files = []
-#     for file in os.listdir(dir_path):
-#         files.extend([os.path.join(dir_path, file)]
-#                      if os.path.isfile(os.path.join(dir_path, file))
-#                      else get_files(os.path.join(dir_path, file)))
+#     for obj in os.listdir(dir_path):
+#         files.extend([os.path.join(dir_path, obj)]
+#                      if os.path.isfile(os.path.join(dir_path, obj))
+#                      else get_files(os.path.join(dir_path, obj)))
 #
 #     return files
 #
