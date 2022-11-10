@@ -8,8 +8,7 @@ while True:
         if x == 'q':
             break
 
-        x = int(x)
-        print(process_item(x))
+        print(process_item(int(x)))
 
     except ValueError:
         print('Please enter a valid number!')
