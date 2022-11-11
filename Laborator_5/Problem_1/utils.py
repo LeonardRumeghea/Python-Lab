@@ -17,7 +17,10 @@ def process_item(x):
     return x
 
 # try:
-#     x = int(input('Enter a number: '))
-#     print(process_item(x))
+#     x = input('Enter a number: ')
+        
+#     prime_number = process_item(int(x))
+#     print( f'\tFirst prime number greater than {x} is {prime_number}\n')
+
 # except ValueError:
-#     print('Please enter a valid number!')
+#     print('\tPlease enter a valid number!\n')

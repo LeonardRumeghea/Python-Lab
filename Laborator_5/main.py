@@ -242,23 +242,23 @@
 
 
 # 9.
-# def pair_calulator(list):
-#     operations = {
-#         'sum': lambda a, b: a + b,
-#         'prod': lambda a, b: a * b,
-#         'pow': lambda a, b: a ** b,
-#     }
+def pair_calulator(list):
+    operations = {
+        'sum': lambda a, b: a + b,
+        'prod': lambda a, b: a * b,
+        'pow': lambda a, b: a ** b,
+    }
 
-#     try:
-#         for a, b in list:
-#             if type(a) != int or type(a) != float or type(b) != int or type(b) != float:
-#                 raise Exception('All elements from tuples must be numbers!')
+    try:
+        for a, b in list:
+            if type(a) != int or type(a) != float or type(b) != int or type(b) != float:
+                raise Exception('All elements from tuples must be numbers!')
 
-#         return [{operation: function(a, b) for operation, function in operations.items()} for a, b in list]
+        return [{operation: function(a, b) for operation, function in operations.items()} for a, b in list]
 
-#     except Exception as e:
-#         print(e)
-#         return []
+    except Exception as e:
+        print(e)
+        return []
 
-# for elem in pair_calulator([(5, 2), (19, 1), (30, 6), (2, 2)] ):
-#     print(elem)
+for elem in pair_calulator([(5, 2), (19, 1), (30, 6), (2, 2)] ):
+    print(elem)
