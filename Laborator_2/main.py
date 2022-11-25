@@ -163,11 +163,10 @@
 #     return result
 #
 # METHOD 2 - FANCY: if every row has a different length.
-# def seats(matrix):
-#     tallest_up_to_him = [0] * (max([len(row) for row in matrix]))
-#     return [(i, j) for i in range(len(matrix)) for j in range(len(matrix[i]))
-#             if matrix[i][j] <= tallest_up_to_him[j] or tallest_up_to_him.__setitem__(j, matrix[i][j])
-#             ]
+def seats(matrix):
+    tallest_up_to_him = [0] * (max([len(row) for row in matrix]))
+    return [ (i, j) for i in range(len(matrix)) for j in range(len(matrix[i]))
+            if matrix[i][j] <= tallest_up_to_him[j] or tallest_up_to_him.__setitem__(j, matrix[i][j]) ]
 #
 #
 # print(seats([

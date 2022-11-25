@@ -1,0 +1,7 @@
+<container class="url" name="url-form" data-id="item">
+    <field class="url" type="url" label="URL"/>
+    <field name="url-form" class="url" data-id="item">
+        <item name="url" type="url" label="URL"/>
+        <item name="url-form" data-id="item" class="url"/>
+    </field>
+</container>
