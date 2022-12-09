@@ -74,43 +74,41 @@ def authenticate(addr, conn):
             if msg.lower() == HELP_COMMAND:
                 help_command(conn)
 
-            elif msg.lower() == DISCONNECT_COOMAND:
-                send_message(conn, DISCONNECT_COOMAND)
+            elif msg == DISCONNECT_COOMAND:
                 print('Disconnected', addr)
                 conn.close()
                 break
 
-            msg = msg.strip().split(' ')
-
-            if len(msg) != 3:
-                send_message(conn, 'Wrong format')
-                continue
-
-            print(msg[0])
-            
-            if msg[0].lower() == LOGIN_COMMAND:
-
-                result = login_command(msg[1], msg[2], addr, conn)
-
-                if result is not None:
-                    connected_users.append(result)
-                    thread = threading.Thread(target=chat_mode, args=(result,))
-                    thread.start()
-                    break
-                
-            elif msg[0].lower() == REGISTER_COMMAND:
-
-                result = register_command(msg[1], msg[2], addr, conn)
-
-                if result is not None:
-                    connected_users.append(result)
-                    thread = threading.Thread(target=chat_mode, args=(result,))
-                    thread.start()
-                    break
-
             else:
-                send_message(conn, 'Wrong command')
-                print('Wrong command')
+                msg = msg.strip().split(' ')
+
+                if len(msg) != 3:
+                    send_message(conn, 'Wrong format')
+                    continue
+
+                if msg[0].lower() == LOGIN_COMMAND:
+
+                    result = login_command(msg[1], msg[2], addr, conn)
+
+                    if result is not None:
+                        connected_users.append(result)
+                        thread = threading.Thread(target=chat_mode, args=(result,))
+                        thread.start()
+                        break
+                    
+                elif msg[0].lower() == REGISTER_COMMAND:
+
+                    result = register_command(msg[1], msg[2], addr, conn)
+
+                    if result is not None:
+                        connected_users.append(result)
+                        thread = threading.Thread(target=chat_mode, args=(result,))
+                        thread.start()
+                        break
+
+                else:
+                    send_message(conn, 'Wrong command')
+                    print('Wrong command')
 
         except Exception as e:
             print('Error: ', e)

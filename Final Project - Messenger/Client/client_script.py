@@ -17,7 +17,7 @@ cipher_suite = Fernet(KEY)
 
 def send(msg):
     message = cipher_suite.encrypt(msg.encode(FORMAT)).decode(FORMAT)
-    
+
     send_length = str(len(message)).encode(FORMAT)
     send_length += b' ' * (HEADER - len(send_length))
 
@@ -45,6 +45,8 @@ def handle_receive():
         print(msg, end='\r')
         print('\r')
 
+    client_socket.close()
+
 def handle_send():
     while True:
         msg = input()
@@ -68,6 +70,8 @@ def login():
         command = input('> ')
 
         if command == DISCONNECT_MESSAGE:
+            send(command)
+            print('Disconnected')
             return False 
         
         # client -> server -> client
