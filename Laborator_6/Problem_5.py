@@ -14,7 +14,7 @@ def parse_xml(path, attrs):
     with open(path, 'r') as file:
         data = file.read()
 
-    reg_attrs = re.compile(r'(\S+)="(.+?)"')
+    reg_attrs = re.compile(r'(\S+)="(\w+?)"')
     result = []
 
     result = [tag for tag in re.compile(r'<\w+\s+[^>]*>').findall(data) 

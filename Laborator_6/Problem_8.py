@@ -6,6 +6,9 @@ import os
 import re
 
 def find_files(path, regex):
+
+
+
     if not os.path.isdir(path):
         raise Exception('Path must be a directory')
 
@@ -32,8 +35,8 @@ def find_files(path, regex):
     return result
 try:
     print(*find_files(
-                'D:\\Documents\\GitHub\\Python-Lab\\Laborator_4\\Folder', 
-                r'[aeiouAEIOU](.+?)[aeiouAEIOU]'
+                'D:\\Documents\\GitHub\\Python-Lab\\Laborator_6\\Folder', 
+                r'[aeiouAEIOU](\.+?)[aeiouAEIOU]'
             ), 
             sep='\n'
         )
