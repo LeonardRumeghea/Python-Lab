@@ -1,6 +1,7 @@
 import socket
 import threading
 from cryptography.fernet import Fernet
+from UI import *
 
 IP = socket.gethostbyname(socket.gethostname())
 PORT = 4000
@@ -34,7 +35,7 @@ def receive():
 
     except Exception as e:
         print(f'\tError: {e}\n')
-  
+
 def handle_receive():
     while True:
         msg = receive()
@@ -98,4 +99,6 @@ def start():
     else:
         client_socket.close()
 
-start()
+if __name__ == '__main__':
+    menu = GUI(socket=client_socket)
+    menu.auth_window()

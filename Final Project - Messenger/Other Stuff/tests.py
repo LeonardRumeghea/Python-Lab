@@ -31,9 +31,7 @@ key = Fernet.generate_key() # MmHYjUIqXpFHmU5mBFGK8Z5Q45rim9djVBl6GMumfgI=
 cipher_suite = Fernet(key)
 
 text = 'Hello!' # Hello!
- 
 encoded_text = cipher_suite.encrypt(text.encode('utf-8')) # gAAAAABjkv4UUU_kpPaNc-h01qDEdfujMnHmd6l-Skhazkr4YotAhnPnoC3sczKgg2nbd0utWQPIPQZMeI6afGl95-R6j0cS7Q==
-
 decoded_text = cipher_suite.decrypt(encoded_text) # Hello!
 
 # import time

@@ -12,7 +12,7 @@ class Message:
             sort_keys=True, indent=4)
 
     def __str__(self):
-        return f'Message from {self.sender} to {self.receiver}: {self.content}'
+        return f'Sender: {self.sender} - Receiver: {self.receiver} - Content: {self.content} - Image: {self.image}'
 
     def __repr__(self):
         return f'Message({self.sender}, {self.receiver}, {self.content})'

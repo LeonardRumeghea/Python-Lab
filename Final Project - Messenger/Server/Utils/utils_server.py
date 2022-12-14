@@ -61,9 +61,7 @@ def logout_user(username):
         if user.username == username:
             user.logged_in = False
             _save_users(known_users)
-            return SUCCESS
-
-    return INVALID_CREDENTIALS
+            return
 
 def send_message(conn, msg, header=HEADER, format=FORMAT):
 
@@ -102,26 +100,33 @@ def _decrypt_string(message):
     return _cipher_suite.decrypt(message.encode(FORMAT)).decode(FORMAT)
 
 def load_messages(decrypt=True):
-    with open(MESSAGES_FILE, 'r') as f:
-        if f.read(1):
-            f.seek(0)
-            messages = json.load(f,
-            object_hook=lambda m: Message(
-                    _cipher_suite.decrypt(m['sender'].encode(FORMAT)).decode(FORMAT) if decrypt else m['sender'], 
-                    _cipher_suite.decrypt(m['receiver'].encode(FORMAT)).decode(FORMAT) if decrypt else m['receiver'], 
-                    _cipher_suite.decrypt(m['content'].encode(FORMAT)).decode(FORMAT) if decrypt else m['content'],
+    try:
+        with open(MESSAGES_FILE, 'r') as f:
+            if f.read(1):
+                f.seek(0)
+                messages = json.load(f,
+                object_hook=lambda m: Message(
+                        _cipher_suite.decrypt(m['sender'].encode(FORMAT)).decode(FORMAT) if decrypt else m['sender'], 
+                        _cipher_suite.decrypt(m['receiver'].encode(FORMAT)).decode(FORMAT) if decrypt else m['receiver'], 
+                        _cipher_suite.decrypt(m['content'].encode(FORMAT)).decode(FORMAT) if decrypt else m['content'],
+                        _cipher_suite.decrypt(m['image'].encode(FORMAT)).decode(FORMAT) if decrypt else m['image']
+                    )
                 )
-            )
-        else:
-            messages = []
+            else:
+                messages = []
 
-    return messages
+        return messages
+    
+    except Exception as e:
+        print(e)
+        return []
 
 def save_message(message):
     
     message.sender = _encrypt_string(message.sender)
     message.receiver = _encrypt_string(message.receiver)
     message.content = _encrypt_string(message.content)
+    message.image = _encrypt_string(message.image)
 
     messages = load_messages(decrypt=False) + [message]
     with open(MESSAGES_FILE, 'w') as f:
@@ -132,6 +137,9 @@ def get_inbox_of(username):
 
 def get_outbox_of(username):
     return [message for message in load_messages() if message.sender == username]
+
+def get_usernames():
+    return [user.username for user in _load_users()]
 
 def format_messages(messages):
     return '\n'.join([f'{message.sender} -> {message.receiver}: {message.content}' for message in messages])

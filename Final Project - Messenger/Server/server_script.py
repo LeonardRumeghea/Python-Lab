@@ -12,17 +12,9 @@ ADDR = (IP, PORT)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind(ADDR)
 
-connected_users = []
-
 def disconnect_user(connected_user):
-    result = logout_user(connected_user.username)
-
-    if result != SUCCESS:
-        return False
-
-    send_message(connected_user.conn, DISCONNECT_COOMAND)
+    logout_user(connected_user.username)
     connected_user.conn.close()
-    connected_users.remove(connected_user)
     return True
 
 def chat_mode(connected_user):
@@ -33,16 +25,16 @@ def chat_mode(connected_user):
         try:
             msg = receive_message(connected_user.conn)
 
-            if msg is None or msg == DISCONNECT_COOMAND:
-                if disconnect_user(connected_user):
-                    break
-                else:
-                    continue
+            print(f'[{connected_user.username}] : {msg}')
 
-            msg = msg.split(' ', 1)
+            if msg is None or msg == DISCONNECT_COOMAND:
+                disconnect_user(connected_user)
+
+            msg = msg.strip().split(' ', 1)
+            print(msg)
             
             if msg[0].lower() == SEND_COMMAND:
-                send_command(connected_user, msg[1], connected_users)
+                send_command(connected_user.conn, msg[1])
             
             elif msg[0].lower() == INBOX_COMMAND:
                 inbox_command(connected_user)
@@ -71,6 +63,8 @@ def authenticate(addr, conn):
             if msg is None:
                 break
 
+            print(f'[{addr}] {msg}')
+
             if msg.lower() == HELP_COMMAND:
                 help_command(conn)
 
@@ -91,7 +85,6 @@ def authenticate(addr, conn):
                     result = login_command(msg[1], msg[2], addr, conn)
 
                     if result is not None:
-                        connected_users.append(result)
                         thread = threading.Thread(target=chat_mode, args=(result,))
                         thread.start()
                         break
@@ -101,7 +94,6 @@ def authenticate(addr, conn):
                     result = register_command(msg[1], msg[2], addr, conn)
 
                     if result is not None:
-                        connected_users.append(result)
                         thread = threading.Thread(target=chat_mode, args=(result,))
                         thread.start()
                         break
