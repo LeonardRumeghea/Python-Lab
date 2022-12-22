@@ -1,12 +1,22 @@
-from .user import User
-from .message import Message
-from .CONSTANTS import *
+from Utils.user import User
+from Utils.message import Message
+from Utils.CONSTANTS import *
 import json
 from cryptography.fernet import Fernet
 
 _cipher_suite = Fernet(KEY)
 
+'''
+    This file contains the functions that are used by the server.
+'''
+
 def _load_users(decrypt=True):
+    '''
+    Loads the users from the USERS_FILE and returns a list of User objects.
+    If decrypt is True, the usernames and passwords will be decrypted.  
+    :param decrypt: Whether or not to decrypt the usernames and passwords. Default is True.
+    :return: A list of User objects.
+    '''
     with open(USERS_FILE, 'r') as f:
         if f.read(1):
             f.seek(0)
@@ -23,6 +33,12 @@ def _load_users(decrypt=True):
     return known_users
 
 def _save_users(known_users):
+    '''
+    Saves the users to the USERS_FILE. The usernames, passwords and logged_in status will be encrypted. 
+
+    :param known_users: A list of User objects.
+    :return: Nothing.
+    '''
 
     for user in known_users:
         user.username = _encrypt_string(user.username)
@@ -33,6 +49,15 @@ def _save_users(known_users):
         json.dump(known_users, f, default=lambda o: o.__dict__, sort_keys=True, indent=4)
 
 def register_user(username, password):
+    '''
+    Registers a new user to system. Will also save the user encrypted to the USERS_FILE.
+
+    :param username: The username of the user.
+    :param password: The password of the user.
+
+    :return: SUCCESS if the user was registered successfully.
+    :return: ALREADY_EXISTS if the username is already taken.
+    '''
     known_users = _load_users()
     for user in known_users:
         if user.username == username:
@@ -43,6 +68,16 @@ def register_user(username, password):
     return SUCCESS
 
 def login_user(username, password):
+    '''
+    Logins a user to the system. Will also save the user encrypted to the USERS_FILE.
+
+    :param username: The username of the user.
+    :param password: The password of the user.
+
+    :return: SUCCESS if the user was logged in successfully.
+    :return: INVALID_CREDENTIALS if the username or password is incorrect.
+    :return: ALREADY_LOGGED_IN if the user is already logged in.
+    '''
 
     known_users = _load_users()
     for user in known_users:
@@ -56,6 +91,13 @@ def login_user(username, password):
     return INVALID_CREDENTIALS
 
 def logout_user(username):
+    '''
+    Logs out a user.  Will set the logged_in attribute to False for the user in the USERS_FILE.
+
+    :param username: The username of the user.
+
+    :return: Nothing.
+    '''
     known_users = _load_users()
     for user in known_users:
         if user.username == username:
@@ -64,6 +106,18 @@ def logout_user(username):
             return
 
 def send_message(conn, msg, header=HEADER, format=FORMAT):
+    """
+    Sends a message to a client. Before transmission, the message will be encrypted. The message's length
+    will be transmitted first, then the message itself. Encryption is done using the Fernet algorithm from
+    the cryptography library. Fernet uses AES in CBC mode with a 128-bit key for encryption.
+
+    :param conn: The connection to the client.
+    :param msg: The message to send.
+    :param header: The length of the message's length. Default is 256.
+    :param format: The format of the message. Default is 'utf-8'.
+
+    :return: Nothing.
+    """
 
     print(f'\nSending message:\n\tDecrypted: {msg}')
 
@@ -77,6 +131,16 @@ def send_message(conn, msg, header=HEADER, format=FORMAT):
     conn.send(msg)
 
 def receive_message(conn, header=HEADER, format=FORMAT):
+    '''
+    Receives a message from a client. After transmission, the message will be decrypted.
+    The length of the message will be received before the message itself.
+
+    :param conn: The connection to the client.
+    :param header: The length of the message's length. Default is 256.
+    :param format: The format of the message. Default is 'utf-8'.
+
+    :return: The decrypted message.
+    '''
 
     msg_lenght = conn.recv(header).decode(format)
 
@@ -94,12 +158,34 @@ def receive_message(conn, header=HEADER, format=FORMAT):
         return None
 
 def _encrypt_string(message):
+    '''
+    Encrypts a string using the Fernet algorithm from the cryptography library and returns the encrypted string.
+
+    :param message: The string to encrypt.
+
+    :return: The encrypted string.
+    '''
     return _cipher_suite.encrypt(message.encode(FORMAT)).decode(FORMAT)
 
 def _decrypt_string(message):
+    '''
+    Decrypts a string using the Fernet algorithm from the cryptography library and returns the decrypted string.
+
+    :param message: The string to decrypt.
+
+    :return: The decrypted string.
+    '''
     return _cipher_suite.decrypt(message.encode(FORMAT)).decode(FORMAT)
 
 def load_messages(decrypt=True):
+    '''
+    Loads all messages from the MESSAGES_FILE. If decrypt is True, the messages will be decrypted before being returned.
+
+    :param decrypt: Whether or not to decrypt the messages. Default is True.
+
+    :return: A list of all messages.
+    '''
+
     try:
         with open(MESSAGES_FILE, 'r') as f:
             if f.read(1):
@@ -122,6 +208,13 @@ def load_messages(decrypt=True):
         return []
 
 def save_message(message):
+    '''
+    Saves a message to the MESSAGES_FILE. The message will be encrypted before saving it.
+
+    :param message: The message to save.
+
+    :return: Nothing.
+    '''
     
     message.sender = _encrypt_string(message.sender)
     message.receiver = _encrypt_string(message.receiver)
@@ -133,15 +226,44 @@ def save_message(message):
         json.dump(messages, f, default=lambda o: o.__dict__, sort_keys=True, indent=4)
 
 def get_inbox_of(username):
+    '''
+    Returns a list of messages that the user with the given username has received.
+
+    :param username: The username of the user to get the inbox of.
+
+    :return: A list of Message objects.
+    '''
+
     return [message for message in load_messages() if message.receiver == username]
 
 def get_outbox_of(username):
+    '''
+    Returns a list of messages that the user with the given username has sent.
+
+    :param username: The username of the user to get the outbox of.
+
+    :return: A list of Message objects.
+    '''
     return [message for message in load_messages() if message.sender == username]
 
 def get_usernames():
+
+    '''
+    Returns a list of usernames of all users saved in USERS_FILE.
+
+    :return: A list of usernames.
+    '''
+
     return [user.username for user in _load_users()]
 
 def format_messages(messages):
+    '''
+    Formats a list of messages to be displayed in the terminal.
+
+    :param messages: The list of messages to format.
+
+    :return: A string containing the formatted messages.
+    '''
     return '\n'.join([f'{message.sender} -> {message.receiver}: {message.content}' for message in messages])
 
 

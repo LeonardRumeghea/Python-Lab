@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module Client.utils_client</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="Client.html" class="white">Client</a>.utils_client</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:d%3A%5Cdocuments%5Cgithub%5Cpython-lab%5Cfinal%20project%20-%20messenger%5Cclient%5Cutils_client.py">d:\documents\github\python-lab\final project - messenger\client\utils_client.py</a></td></tr></table>
+    <p></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="json.html">json</a><br>
+</td><td class="multicolumn"><a href="socket.html">socket</a><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-close_connection"><strong>close_connection</strong></a>(socket)</dt><dd><span class="code">Closes&nbsp;the&nbsp;connection&nbsp;with&nbsp;the&nbsp;server.</span></dd></dl>
+ <dl><dt><a name="-deserializable_messages"><strong>deserializable_messages</strong></a>(msg_json)</dt><dd><span class="code">Deserializes&nbsp;a&nbsp;list&nbsp;of&nbsp;messages&nbsp;from&nbsp;json&nbsp;format&nbsp;to&nbsp;Message&nbsp;objects.<br>
+&nbsp;<br>
+msg_json:&nbsp;The&nbsp;list&nbsp;of&nbsp;messages&nbsp;in&nbsp;json&nbsp;format.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;list&nbsp;of&nbsp;messages&nbsp;in&nbsp;Message&nbsp;objects.</span></dd></dl>
+ <dl><dt><a name="-load_inbox"><strong>load_inbox</strong></a>(socket)</dt><dd><span class="code">Loads&nbsp;the&nbsp;inbox&nbsp;of&nbsp;the&nbsp;user.&nbsp;The&nbsp;server&nbsp;will&nbsp;send&nbsp;the&nbsp;messages&nbsp;from&nbsp;the&nbsp;inbox.<br>
+&nbsp;<br>
+socket:&nbsp;The&nbsp;socket&nbsp;used&nbsp;to&nbsp;send&nbsp;the&nbsp;message.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;list&nbsp;of&nbsp;messages&nbsp;from&nbsp;the&nbsp;inbox.</span></dd></dl>
+ <dl><dt><a name="-load_outbox"><strong>load_outbox</strong></a>(socket)</dt><dd><span class="code">Loads&nbsp;the&nbsp;outbox&nbsp;of&nbsp;the&nbsp;user.&nbsp;The&nbsp;server&nbsp;will&nbsp;send&nbsp;the&nbsp;messages&nbsp;from&nbsp;the&nbsp;outbox.<br>
+&nbsp;<br>
+socket:&nbsp;The&nbsp;socket&nbsp;used&nbsp;to&nbsp;send&nbsp;the&nbsp;message.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;list&nbsp;of&nbsp;messages&nbsp;from&nbsp;the&nbsp;outbox.</span></dd></dl>
+ <dl><dt><a name="-login_function"><strong>login_function</strong></a>(socket, username, password)</dt><dd><span class="code">Sends&nbsp;a&nbsp;login&nbsp;request&nbsp;to&nbsp;the&nbsp;server.&nbsp;The&nbsp;server&nbsp;will&nbsp;check&nbsp;if&nbsp;the&nbsp;username&nbsp;and&nbsp;password&nbsp;are&nbsp;correct.<br>
+&nbsp;<br>
+socket:&nbsp;The&nbsp;socket&nbsp;used&nbsp;to&nbsp;send&nbsp;the&nbsp;message.<br>
+username:&nbsp;The&nbsp;username&nbsp;of&nbsp;the&nbsp;user.<br>
+password:&nbsp;The&nbsp;password&nbsp;of&nbsp;the&nbsp;user.<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;login&nbsp;was&nbsp;successful,&nbsp;False&nbsp;otherwise.</span></dd></dl>
+ <dl><dt><a name="-receive"><strong>receive</strong></a>(socket)</dt><dd><span class="code">Receives&nbsp;a&nbsp;message&nbsp;from&nbsp;the&nbsp;server.&nbsp;Message&nbsp;is&nbsp;decrypted&nbsp;after&nbsp;receiving.&nbsp;We&nbsp;receive&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;<br>
+message&nbsp;first,&nbsp;then&nbsp;the&nbsp;message&nbsp;itself.<br>
+&nbsp;<br>
+socket:&nbsp;The&nbsp;socket&nbsp;used&nbsp;to&nbsp;receive&nbsp;the&nbsp;message.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;message&nbsp;received&nbsp;decrypted.</span></dd></dl>
+ <dl><dt><a name="-register_function"><strong>register_function</strong></a>(socket, username, password)</dt><dd><span class="code">Sends&nbsp;a&nbsp;register&nbsp;request&nbsp;to&nbsp;the&nbsp;server.&nbsp;The&nbsp;server&nbsp;will&nbsp;check&nbsp;if&nbsp;the&nbsp;username&nbsp;is&nbsp;already&nbsp;taken.<br>
+&nbsp;<br>
+socket:&nbsp;The&nbsp;socket&nbsp;used&nbsp;to&nbsp;send&nbsp;the&nbsp;message.<br>
+username:&nbsp;The&nbsp;username&nbsp;of&nbsp;the&nbsp;user.<br>
+password:&nbsp;The&nbsp;password&nbsp;of&nbsp;the&nbsp;user.<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;register&nbsp;was&nbsp;successful,&nbsp;False&nbsp;otherwise.</span></dd></dl>
+ <dl><dt><a name="-send"><strong>send</strong></a>(socket, msg)</dt><dd><span class="code">Sends&nbsp;a&nbsp;message&nbsp;to&nbsp;the&nbsp;server.&nbsp;Message&nbsp;is&nbsp;encrypted&nbsp;before&nbsp;sending.&nbsp;We&nbsp;send&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;message&nbsp;first,<br>
+then&nbsp;the&nbsp;message&nbsp;itself.<br>
+Encryption&nbsp;is&nbsp;done&nbsp;using&nbsp;the&nbsp;Fernet&nbsp;algorithm.&nbsp;The&nbsp;key&nbsp;is&nbsp;stored&nbsp;in&nbsp;the&nbsp;CONSTANTS&nbsp;file.<br>
+It&nbsp;is&nbsp;an&nbsp;implementation&nbsp;of&nbsp;symmetric&nbsp;(also&nbsp;known&nbsp;as&nbsp;“secret&nbsp;key”)&nbsp;authenticated&nbsp;cryptography.&nbsp;Fernet&nbsp;takes&nbsp;a&nbsp;<br>
+secret&nbsp;key&nbsp;and&nbsp;uses&nbsp;it&nbsp;to&nbsp;both&nbsp;encrypt&nbsp;data&nbsp;and&nbsp;verify&nbsp;that&nbsp;an&nbsp;encrypted&nbsp;message&nbsp;hasn't&nbsp;been&nbsp;tampered&nbsp;with.<br>
+&nbsp;<br>
+socket:&nbsp;The&nbsp;socket&nbsp;used&nbsp;to&nbsp;send&nbsp;the&nbsp;message.<br>
+msg:&nbsp;The&nbsp;message&nbsp;to&nbsp;be&nbsp;sent.</span></dd></dl>
+ <dl><dt><a name="-send_message"><strong>send_message</strong></a>(socket, sender, receiver, content, image)</dt><dd><span class="code">Sends&nbsp;a&nbsp;message&nbsp;to&nbsp;the&nbsp;server.&nbsp;The&nbsp;server&nbsp;will&nbsp;check&nbsp;if&nbsp;the&nbsp;receiver&nbsp;exists.<br>
+&nbsp;<br>
+socket:&nbsp;The&nbsp;socket&nbsp;used&nbsp;to&nbsp;send&nbsp;the&nbsp;message.<br>
+sender:&nbsp;The&nbsp;sender&nbsp;of&nbsp;the&nbsp;message.<br>
+receiver:&nbsp;The&nbsp;receiver&nbsp;of&nbsp;the&nbsp;message.<br>
+content:&nbsp;The&nbsp;content&nbsp;of&nbsp;the&nbsp;message.<br>
+image:&nbsp;The&nbsp;image&nbsp;of&nbsp;the&nbsp;message.&nbsp;Default&nbsp;value&nbsp;is&nbsp;NO_IMAGE.<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;message&nbsp;was&nbsp;sent&nbsp;successfully,&nbsp;False&nbsp;otherwise.</span></dd></dl>
+ <dl><dt><a name="-serializable_messages"><strong>serializable_messages</strong></a>(msg_list)</dt><dd><span class="code">Serializes&nbsp;a&nbsp;list&nbsp;of&nbsp;messages&nbsp;from&nbsp;Message&nbsp;objects&nbsp;to&nbsp;json&nbsp;format.<br>
+&nbsp;<br>
+msg_list:&nbsp;The&nbsp;list&nbsp;of&nbsp;messages&nbsp;in&nbsp;Message&nbsp;objects.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;list&nbsp;of&nbsp;messages&nbsp;in&nbsp;json&nbsp;format.</span></dd></dl>
+ <dl><dt><a name="-serialize_message"><strong>serialize_message</strong></a>(msg)</dt><dd><span class="code">Serializes&nbsp;a&nbsp;message&nbsp;from&nbsp;Message&nbsp;object&nbsp;to&nbsp;json&nbsp;format.<br>
+&nbsp;<br>
+msg:&nbsp;The&nbsp;message&nbsp;in&nbsp;Message&nbsp;object.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;message&nbsp;in&nbsp;json&nbsp;format.</span></dd></dl>
+</td></tr></table>
+</body></html>
