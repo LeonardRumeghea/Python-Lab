@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Python: module Client.message</title>
+<title>Python: module Utils.message</title>
 </head><body>
 
 <table class="heading">
 <tr class="heading-text decor">
-<td class="title">&nbsp;<br><strong class="title"><a href="Client.html" class="white">Client</a>.message</strong></td>
-<td class="extra"><a href=".">index</a><br><a href="file:d%3A%5Cdocuments%5Cgithub%5Cpython-lab%5Cfinal%20project%20-%20messenger%5Cclient%5Cmessage.py">d:\documents\github\python-lab\final project - messenger\client\message.py</a></td></tr></table>
+<td class="title">&nbsp;<br><strong class="title"><a href="Utils.html" class="white">Utils</a>.message</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:d%3A%5Cdocuments%5Cgithub%5Cpython-lab%5Cfinal%20project%20-%20messenger%5Cserver%5Cutils%5Cmessage.py">d:\documents\github\python-lab\final project - messenger\server\utils\message.py</a></td></tr></table>
     <p></p>
 <p>
 <table class="section">
@@ -27,7 +27,7 @@
 <dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
 </dt><dd>
 <dl>
-<dt class="heading-text"><a href="Client.message.html#Message">Message</a>
+<dt class="heading-text"><a href="Utils.message.html#Message">Message</a>
 </dt></dl>
 </dd>
 </dl>
@@ -39,18 +39,19 @@
 <tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
 <td class="decor title-decor" colspan=2><span class="code"><a href="#Message">Message</a>(sender,&nbsp;receiver,&nbsp;content,&nbsp;image=None)<br>
 &nbsp;<br>
-<a href="#Message">Message</a>&nbsp;class.&nbsp;It&nbsp;contains&nbsp;the&nbsp;sender,&nbsp;receiver,&nbsp;content&nbsp;and&nbsp;image&nbsp;of&nbsp;the&nbsp;message.&nbsp;Is&nbsp;used&nbsp;to&nbsp;send&nbsp;messages&nbsp;<br>
-between&nbsp;users.<br>&nbsp;</span></td></tr>
+Represents&nbsp;a&nbsp;message&nbsp;sent&nbsp;between&nbsp;two&nbsp;users.<br>&nbsp;</span></td></tr>
 <tr><td>&nbsp;</td>
 <td class="singlecolumn">Methods defined here:<br>
-<dl><dt><a name="Message-__init__"><strong>__init__</strong></a>(self, sender, receiver, content, image=None)</dt><dd><span class="code">sender:&nbsp;The&nbsp;sender&nbsp;of&nbsp;the&nbsp;message.<br>
-receiver:&nbsp;The&nbsp;receiver&nbsp;of&nbsp;the&nbsp;message.<br>
-content:&nbsp;The&nbsp;content&nbsp;of&nbsp;the&nbsp;message.<br>
-image:&nbsp;The&nbsp;image&nbsp;of&nbsp;the&nbsp;message.&nbsp;It&nbsp;is&nbsp;optional.</span></dd></dl>
+<dl><dt><a name="Message-__init__"><strong>__init__</strong></a>(self, sender, receiver, content, image=None)</dt><dd><span class="code">Initializes&nbsp;the&nbsp;<a href="builtins.html#object">object</a>&nbsp;with&nbsp;the&nbsp;given&nbsp;parameters.&nbsp;The&nbsp;image&nbsp;parameter&nbsp;is&nbsp;optional.<br>
+&nbsp;<br>
+:param&nbsp;sender:&nbsp;The&nbsp;username&nbsp;of&nbsp;the&nbsp;sender.<br>
+:param&nbsp;receiver:&nbsp;The&nbsp;username&nbsp;of&nbsp;the&nbsp;receiver.<br>
+:param&nbsp;content:&nbsp;The&nbsp;content&nbsp;of&nbsp;the&nbsp;message.<br>
+:param&nbsp;image:&nbsp;The&nbsp;image&nbsp;of&nbsp;the&nbsp;message.&nbsp;It&nbsp;is&nbsp;optional.</span></dd></dl>
 
-<dl><dt><a name="Message-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Returns&nbsp;the&nbsp;message&nbsp;as&nbsp;a&nbsp;string.</span></dd></dl>
+<dl><dt><a name="Message-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Returns&nbsp;a&nbsp;string&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="builtins.html#object">object</a>.</span></dd></dl>
 
-<dl><dt><a name="Message-toJSON"><strong>toJSON</strong></a>(self)</dt><dd><span class="code">Returns&nbsp;the&nbsp;message&nbsp;as&nbsp;a&nbsp;JSON&nbsp;string.</span></dd></dl>
+<dl><dt><a name="Message-toJSON"><strong>toJSON</strong></a>(self)</dt><dd><span class="code">Return&nbsp;a&nbsp;JSON&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="builtins.html#object">object</a>.</span></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>
