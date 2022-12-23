@@ -94,7 +94,7 @@ def send_message(socket, sender, receiver, content, image=NO_IMAGE):
 
     send(socket, f'send {msg}')
 
-    return receive(socket) == SEND_SUCCESS
+    return receive(socket)
 
 def load_inbox(socket):
     '''

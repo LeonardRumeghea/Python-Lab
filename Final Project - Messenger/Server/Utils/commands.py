@@ -1,6 +1,8 @@
 from .utils_server import *
 from .connection import *
 
+import sys
+
 def send_command(conn, msg_json):
     '''
         This function is called when the client sends a SEND command. This will send a message to another user.
@@ -18,6 +20,11 @@ def send_command(conn, msg_json):
         msg.image = ''
     for username in get_usernames():
         if username == msg.receiver:
+
+            if (sys.getsizeof(msg.image) > 1_000_000):
+                send_message(conn, IMAGE_TOO_BIG)
+                break
+
             save_message(Message(msg.sender, msg.receiver, msg.content, msg.image))
             send_message(conn, SEND_SUCCESS)
             break

@@ -13,6 +13,7 @@ REGISTER_SUCCESS = 'register success'
 DISCONNECT_MESSAGE = 'exit'
 SEND_SUCCESS = 'send success'
 NO_IMAGE = 'no image'
+IMAGE_TOO_BIG = 'image too big'
 
 
 EMOJIS = {

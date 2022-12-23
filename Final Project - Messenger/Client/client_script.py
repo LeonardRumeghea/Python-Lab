@@ -6,6 +6,7 @@ from utils_client import *
 import socket
 import os
 import base64
+import sys
 
 BUTTON_COLOR = "#4860A0"
 BUTTON_FONT = "Helvetica 14 bold"
@@ -126,6 +127,7 @@ class GUI:
 
             with open("temp.jpg", "wb") as file:
                 file.write(image_file)
+                print(sys.getsizeof(image_file))
 
         self.remove_widgets(self.Window)
 
@@ -343,7 +345,12 @@ class GUI:
 
         print(result)
 
-        self.confirmation_label.configure(text="✔" if result == True else "✖")
+        if result == SEND_SUCCESS:
+            self.confirmation_label.configure(text="✔")
+        elif result == IMAGE_TOO_BIG:
+            self.confirmation_label.configure(text="TB")
+        else:
+            self.confirmation_label.configure(text="✖")
 
     def close(self):
         '''	
@@ -356,7 +363,7 @@ class GUI:
         '''
             Opens a file explorer and allows the user to select a file. The file name is displayed.
         '''
-        self.file_path = fd.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"), ("all files","*.*")))
+        self.file_path = fd.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"),))
         self.label_image_name.configure(text=os.path.basename(self.file_path))
 
     def remove_widgets(self, ofElement = None):
